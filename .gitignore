@@ -6,6 +6,11 @@ config.py
 __pycache__/
 *.pyc
 
-笔记/
+code_notebook/
+
+# 论文 PDF（大文件，只留在本地）
+论文/
 
 AGENTS.md
+
+qwen3.5.Modelfile
