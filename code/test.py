@@ -16,8 +16,7 @@ history = [
 ]
 
 # Ollama 0.33.2 的 /v1 接口会忽略 "think" 字段，只认 reasoning_effort
-# NO_THINK=True 关闭思考（直接出答案）；改成 False 则让模型先思考再回答
-NO_THINK = True
+NO_THINK = False
 
 def chat(user_msg: str) -> str:
         history.append({"role": "user", "content": user_msg})

@@ -15,7 +15,7 @@ history = [
     {"role": "system", "content": system_prompt},  
 ]
 
-NO_THINK = True
+NO_THINK = False
 
 def chat(user_msg: str) -> str:
         history.append({"role": "user", "content": user_msg})
