@@ -1,7 +1,6 @@
 
 from openai import OpenAI
-from config import API_KEY
-import json
+
 
 client = OpenAI(
     base_url="http://localhost:11434/v1",  # 指向本地 Ollama，不是 DeepSeek

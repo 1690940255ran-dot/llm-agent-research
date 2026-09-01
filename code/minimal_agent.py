@@ -2,7 +2,10 @@ from openai import OpenAI
 from config import API_KEY
 import json
 
-client = OpenAI(api_key=API_KEY, base_url="https://api.deepseek.com")
+client = OpenAI(
+    base_url="http://localhost:11434/v1",  # 指向本地 Ollama，不是 DeepSeek
+    api_key="ollama"                       # 本地服务不验 key，占位符而已
+)
 
 
 with open('C:\\Users\\cj169\\Desktop\\科研\\code\\prompts\\system_v1.txt', 'r', encoding='utf-8') as f:
@@ -12,12 +15,15 @@ history = [
     {"role": "system", "content": system_prompt},  
 ]
 
+NO_THINK = True
+
 def chat(user_msg: str) -> str:
         history.append({"role": "user", "content": user_msg})
         resp = client.chat.completions.create(
-        model="deepseek-v4-flash",
+        model="qwen3.5:9b",
         messages=history,
         temperature=0.7,
+        extra_body={"reasoning_effort": "none" if NO_THINK else "high"}
         )
         reply = resp.choices[0].message.content
         history.append({"role": "assistant", "content": reply})
@@ -41,6 +47,6 @@ if __name__ == "__main__":
 
         print("Agent:", chat(msg))
         import json
-        with open("history.json", "w", encoding="utf-8") as f:
+        with open("data/history.json", "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
         
